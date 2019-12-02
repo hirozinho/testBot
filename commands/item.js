@@ -46,26 +46,6 @@ module.exports = {
 
                     }
                     )
-                                    
-
-                    // collector.on('collect', (reaction, reactionCollector) => {
-                    //     switch(reaction.emoji.name){
-                    //         case '1️⃣':
-                    //             m.channel.send("Time is one day.")
-                    //             collector.stop();
-                    //             break;
-                    //         case '2️⃣':
-                    //             m.channel.send("Time is two days.")
-                    //             collector.stop();
-                    //             break;
-                    //         case '3️⃣':
-                    //             m.channel.send("Time is three days.")
-                    //             collector.stop();
-                    //             break;
-
-                    //     }
-                    // });
-
 
                 }
             });
