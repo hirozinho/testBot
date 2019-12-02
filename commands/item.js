@@ -16,31 +16,34 @@ module.exports = {
                     collector.stop();
 
                     m.channel.send("Select time period\n1 - one day,\n2 - two days,\n3 - three days.").then(mess => {
-                        mess.react('1️⃣').then(() => mess.react('2️⃣').then(() => mess.react('3️⃣')))
+                        mess.react('1️⃣').then(() => mess.react('2️⃣').then(() => mess.react('3️⃣')));
+
+                        const reactFilter = (reaction, user) => {
+                            return ['1️⃣','2️⃣','3️⃣'].includes(reaction.emoji.name) && user.id === message.author.id;
+                        }
+                        const reactCollector = mess.createReactionCollector(reactFilter, {time: 30000, mas: 1});
+    
+                        reactCollector.on('collect', (reaction, reactionCollector) => {
+                            switch(reaction.emoji.name){
+                                case '1️⃣':
+                                    message.channel.send("Time is one day.")
+                                    reactCollector.stop();
+                                    break;
+                                case '2️⃣':
+                                    message.channel.send("Time is two days.")
+                                    reactCollector.stop();
+                                    break;
+                                case '3️⃣':
+                                    message.channel.send("Time is three days.")
+                                    reactCollector.stop();
+                                    break;
+    
+                            }
+                        });
+
                     })
 
-                    const reactFilter = (reaction, user) => {
-                        return ['1️⃣','2️⃣','3️⃣'].includes(reaction.emoji.name) && user.id === message.author.id;
-                    }
-                    const reactCollector = message.createReactionCollector(reactFilter, {time: 30000, mas: 1});
-
-                    reactCollector.on('collect', (reaction, reactionCollector) => {
-                        switch(reaction.emoji.name){
-                            case '1️⃣':
-                                message.channel.send("Time is one day.")
-                                // collector.stop();
-                                break;
-                            case '2️⃣':
-                                message.channel.send("Time is two days.")
-                                // collector.stop();
-                                break;
-                            case '3️⃣':
-                                message.channel.send("Time is three days.")
-                                // collector.stop();
-                                break;
-
-                        }
-                    });
+                    
                     
                         
                     
